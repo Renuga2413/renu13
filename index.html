@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Valentine Special ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  text-align:center;
+  background:linear-gradient(to right,#ff9a9e,#fad0c4);
+  color:white;
+  padding-top:80px;
+  overflow:hidden;
+}
+
+section{
+  display:none;
+  padding:20px;
+}
+
+.active{
+  display:block;
+}
+
+button{
+  margin-top:40px;
+  padding:12px 25px;
+  font-size:14px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  background:rgb(197, 57, 80);
+  color:white;
+}
+
+img{
+  width:200px;
+  margin:10px;
+  border-radius:20px;
+}
+
+/* Flying Hearts */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 24px;
+  animation: fly 6s linear infinite;
+}
+
+@keyframes fly {
+  0% { transform: translateY(0); opacity:1; }
+  100% { transform: translateY(-100vh); opacity:0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HOME -->
+<section id="home" class="active">
+  <h1>Happy Valentine’s Day</h1>
+  <h1>Ladduuu ❤️</h1>
+  <h2>I Love You Too Ladduuu 😘</h2>
+  <button onclick="showSection('countdown'); startCountdown();">
+    Open Countdown ⏳
+  </button>
+</section>
+
+<!-- COUNTDOWN -->
+<section id="countdown">
+  <h1>Ready for Surprise? ⏳</h1>
+  <h1 id="countNumber" style="font-size:80px;">10</h1>
+</section>
+
+<!-- MEMORIES -->
+<section id="memory">
+  <h1>Our Beautiful Memories 💖</h1>
+
+  <img src="c:\Users\RENUGA\OneDrive\Hình ảnh\New folder\WhatsApp Image 2026-02-12 at 6.48.54 PM.jpeg">
+  <img src="c:\Users\RENUGA\OneDrive\Hình ảnh\New folder\WhatsApp Image 2026-02-12 at 6.44.44 PM.jpeg">
+  <img src="c:\Users\RENUGA\OneDrive\Hình ảnh\New folder\WhatsApp Image 2026-02-12 at 6.50.38 PM.jpeg">
+  <img src="c:\Users\RENUGA\OneDrive\Hình ảnh\New folder\WhatsApp Image 2026-02-12 at 6.49.22 PM.jpeg">
+
+
+  <br>
+  <button onclick="showSection('letter'); startLetter(); heartBurst();">
+    Open Love Letter 💌
+  </button>
+</section>
+
+<!-- LOVE LETTER -->
+<section id="letter">
+  <h1>My Love Letter 💌</h1>
+  <p id="typedText" style="width:70%; margin:auto; line-height:1.8;"></p>
+</section>
+
+<script>
+
+// Section switch
+function showSection(id){
+  var sections = document.querySelectorAll("section");
+  sections.forEach(function(sec){
+    sec.classList.remove("active");
+  });
+  document.getElementById(id).classList.add("active");
+}
+
+// 10 to 1 Countdown
+function startCountdown() {
+  let count = 10;
+  let display = document.getElementById("countNumber");
+  display.innerText = count;
+
+  let timer = setInterval(function() {
+    count--;
+    display.innerText = count;
+
+    if (count <= 0) {
+      clearInterval(timer);
+      display.innerText = "💖 Surprise 💖";
+
+      setTimeout(function(){
+        showSection('memory');
+      }, 1000);
+    }
+  }, 1000);
+}
+
+// Flying hearts always
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 6000);
+}
+setInterval(createHeart, 500);
+
+// Love Letter Text
+var text = `My Love ❤️,
+     From the moment you walked into my life, everything changed in the most beautiful way.
+    The world feels softer, brighter, and warmer because you are in it.
+    You are not just a part of my life — you are the best part of it.
+
+    Every time you smile, my heart feels at home. Every time you laugh,
+    it feels like music meant only for me. Even on my hardest days,
+    just thinking about you gives me strength and peace.
+
+    You are my comfort in chaos, my light in darkness,
+    and my happiness in every little moment.
+    Loving you is not a choice I made — it is something my heart naturally does with every beat.
+
+    I promise to stand beside you in every season of life —
+    to support you, to believe in you, and to love you in ways that words can never fully express.
+
+    <br><br>
+    You are my today, my tomorrow, and my forever. ❤️
+
+Happy Valentine’s Day 💖
+Always and forever yours ❤️`;
+
+var i = 0;
+
+function startLetter() {
+  document.getElementById("typedText").innerHTML = "";
+  i = 0;
+  typeWriter();
+}
+
+function typeWriter() {
+  if (i < text.length) {
+    document.getElementById("typedText").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeWriter, 40);
+  }
+}
+
+// Heart Burst Surprise
+function heartBurst(){
+  for(let j=0; j<25; j++){
+    const heart = document.createElement("div");
+    heart.innerHTML = "💋";
+    heart.style.position="fixed";
+    heart.style.left="50%";
+    heart.style.top="50%";
+    heart.style.fontSize="30px";
+    heart.style.transform=`translate(${Math.random()*300-150}px, ${Math.random()*300-150}px)`;
+    heart.style.transition="1s";
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{ heart.remove(); },1000);
+  }
+}
+</script>
+
+</body>
+</html>
